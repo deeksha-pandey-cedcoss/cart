@@ -1,39 +1,54 @@
 $(document).ready(function(){
  
-   
-        
-
-
+  
 
 });
+
+
+function  incomplete_to_complete(id) {
+            //alert("Checkbox is clicked");
+        $newid=id;
+       // console.log(id);
+       flag=true;
+        $.ajax({
+            method:"POST",
+            url:"complete.php",
+            data:"d="+$newid,
+
+        }).done(function(result){
+            $("#completed-tasks").html(result);
+            //displaycompleted(result);
+           // console.log(result);
+           deletetask(id);
+        })
+}
+displaytodo();
 function addtask()
-   {
-    let input=document.getElementById("new-task").value;
-       
-    if($("#new-task").val()!='')
+{
+    $input=$("#new-task").val();
+   
+    if($input!="")
     {
         $('#message').html("");
         $.ajax({
-            method:'POST',
-            url:'addtask.php',
-            data: "data="+ input,
-            datatype:"text",
-            success:function(data)
-            {
-                displaytodo(data);
-                //alert(data);
-               
-            }
+            method:"POST",
+            url:"addtask.php",
+            data:"d="+$input,
+            datatype:"text"
+        }).done(function(result){
+            displaytodo(result);
+           
         });
+      
     }
-else{
-    $('#message').html('<div class="alert alert-danger">Enter Task Details</div>');
+    else{
+         $('#message').html('<div class="alert alert-danger">Enter Task Details</div>');
+}
+}
 
-}  
-   }
 function deletetask(id)
 {
-    event.preventDefault();
+  
     console.log(id);
     $.ajax({
     method:"POST",
@@ -47,11 +62,11 @@ displaytodo(data);
 }
 });
 }  
-
+let global=0;
 function edittask(id)
 {
-    event.preventDefault();
    
+    global = id; 
     $.ajax({
         method:"POST",
         url:"edit.php",
@@ -59,7 +74,10 @@ function edittask(id)
         data:"d="+id,
         success:function(data)
         {
-             console.log(data);
+            
+           $("#new-task").val(data);
+
+           //console.log(data);
         }
     });
     
@@ -67,7 +85,7 @@ function edittask(id)
 
 function displaytodo()
 {
-    event.preventDefault();
+    $('#message').html('');
     $.ajax({
         method:"POST",
         url:"display.php",
@@ -75,44 +93,46 @@ function displaytodo()
         
         success:function(data)
         { 
-           
             $('#message').html('Task Details Added');
             $("#incomplete-tasks").html(data);
+            
         }
     });
 }
 
 
-function incompletetask(id)
-{
-   
-console.log(id);
 
-$.ajax({
-    method:"POST",
-    url:"complete.php",
-    datatype:"text",
-    data:"d="+id,
-    success:function(data)
-    { 
-    console.log(data);
-       //$("#completed-tasks").html(data);
-    }
-});
-}
-function completedtask(id)
+
+function update()
 {
+    
+    $new=$("#new-task").val();
+
     $.ajax({
         method:"POST",
-        url:"completedtask.php",
+        url:"update.php",
+        data:{"d":$new,"globalid":global},
+        success:function(result)
+        {
+            displaytodo(result);
+          
+        }
+    })
+}
+
+function displaycompleted()
+{
+    
+    $.ajax({
+        method:"POST",
+        url:"displaycompleted.php",
         datatype:"text",
         
         success:function(data)
         { 
             console.log(data);
-            // $('#message').html('Task Details Added');
-            // $("#completed-tasks").html(data);
-            // displaytodo();
+           // $("#completed-tasks").html(data);
+            
         }
     });
 }

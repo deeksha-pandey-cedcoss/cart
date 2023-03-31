@@ -10,7 +10,8 @@
             <h3>Add Item</h3>
             <p>
                 <input id="new-task" type="text">
-                <button  name="add" onclick="addtask()" >Add</button>
+                <button  name="add" onclick="addtask()"  >Add</button>
+                <button class='edit' onclick="update()" >UPDATE </button>
                 <p id="message"></p>
                 <!-- onclick=addtask() -->
             </p>
@@ -23,7 +24,7 @@
     
             <h3>Completed</h3>
             <ul id="completed-tasks">
-                <li><input type="checkbox" checked><label>See the Doctor</label><input type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>
+                <!-- <li><input id="checkmate"type="checkbox" checked><label>See the Doctor</label><input type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li> -->
             </ul>
         </div>
     

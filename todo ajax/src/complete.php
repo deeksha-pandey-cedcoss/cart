@@ -1,16 +1,21 @@
 <?php
 session_start();
 include_once "config.php";
-
-$val=$_POST['id'];
-// print_r($val);
+//print_r($_POST['d']);
 $temp=array();
-array_push($temp,$val);
-
- array_splice($_SESSION['task'],$val,1);
- array_push($_SESSION['completed'],$temp);
-
-echo ($temp);
-include "completedtask.php";
+$i=$_POST['d']*1;
+//print_r(array_splice($_SESSION['task'],$i,1));
+array_push($_SESSION['completed'],$_POST['task']['d']);
 //print_r($temp);
+
+// if($temp!="")
+// {
+//     array_push($_SESSION['completed'],$temp);
+// }
+// //session_destroy();
+// print_r($_SESSION['completed']);
+
+// session_unset();
+//     session_destroy();
+
 ?>

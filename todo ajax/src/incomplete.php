@@ -1,6 +1,7 @@
 <?php
 session_start();
-in
+include "config.php";
+print_r($_POST['id']);
 
 
 

@@ -1,14 +1,29 @@
 <?php
 session_start();
 include_once "config.php";
-print_r($_SESSION['task'][$_POST['d']]);
-print_r($_SESSION['task']);
+$id=$_POST['d'][0];
+$new_input=$_SESSION['task'][$_POST['d']];
+$str="";
+
 foreach($_SESSION["task"] as $key => $value )
 {
     
-        $_SESSION["task"][$id];
-    
+   
+    if($key==$id)
+    {
+      // print_r($key);
+     $str.="$value";
+      
+      $i++;
     }
+    
+     
+    
+}
+echo $str;
+//echo $id;
+
+//include_once "update.php";
  
 
 ?>

@@ -5,4 +5,6 @@ if (!isset($_SESSION['task'])) {
 if (!isset($_SESSION['completed'])) {
     $_SESSION['completed'] = array();
 }
+// unset($_SESSION['completed']);
+// session_destroy();
 ?>
